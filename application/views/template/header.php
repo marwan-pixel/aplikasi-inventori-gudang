@@ -60,7 +60,7 @@
         <nav class="navbar navbar-static-top ">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a href="<?= base_url('data_kategori') ?>" class="navbar-brand"><b>Sistem Informasi Gudang</b></a>
+                    <a href="<?= base_url('/') ?>" class="navbar-brand"><b>Sistem Informasi Gudang</b></a>
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
                         <i class="fa fa-bars"></i>
                     </button>

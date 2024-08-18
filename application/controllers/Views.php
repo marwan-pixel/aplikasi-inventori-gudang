@@ -19,6 +19,7 @@ class Views extends CI_Controller
     public function index()
     {
         $this->load->view('template/header');
+        $this->load->view('home');
         $this->load->view('template/footer');
     }
     public function dataKategori()
@@ -41,7 +42,20 @@ class Views extends CI_Controller
     public function dataBarang()
     {
         $tb_kategori = $this->model->getDataModel('tb_kategori', ['id', 'kategori']);
-        $tb_barang = $this->model->getDataModel('tb_barang', ['id', 'kategori_id', 'barang', 'stok', 'created_at', 'updated_at']);
+        $tb_barang = $this->model->getDataJoinModel(
+            table: 'tb_barang',
+            data: [
+                'tb_barang.id',
+                'tb_barang.kategori_id',
+                'tb_kategori.kategori',
+                'tb_barang.barang',
+                'tb_barang.stok',
+                'tb_barang.created_at',
+                'tb_barang.updated_at'
+            ],
+            param: null,
+            joins: [['tb_kategori', 'tb_barang.kategori_id = tb_kategori.id']]
+        );
         $this->load->view('template/header');
         $this->load->view('dataBarang', ["kategori" => $tb_kategori, 'barang' => $tb_barang]);
         $this->load->view('template/footer');

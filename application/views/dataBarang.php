@@ -21,7 +21,6 @@
                                     }
                                     ?>
                                 </select>
-                                <!-- <small id="idkategori-error" class="text-danger"></small> -->
                             </div>
                             <div class="form-group">
                                 <label for="inputBarang">Barang</label>
@@ -142,7 +141,7 @@
                             ?>
                                     <tr>
                                         <td><?= ++$key ?></td>
-                                        <td><?= $value['kategori_id'] ?></td>
+                                        <td><?= $value['kategori'] ?></td>
                                         <td><?= $value['barang'] ?></td>
                                         <td><?= $value['stok'] ?></td>
                                         <td>

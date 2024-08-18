@@ -2,7 +2,7 @@
 
 class Model extends CI_Model
 {
-    public function getDataModel($table, $data, $param = null): array
+    public function getDataModel(string $table, array $data, array $param = null): array
     {
         $process = $this->db->select(implode(",", $data));
         if ($param !== null) {
@@ -12,7 +12,7 @@ class Model extends CI_Model
         return $process;
     }
 
-    public function insertDataModel($table, $data)
+    public function insertDataModel(string $table, array $data): array
     {
         try {
             $this->db->insert($table, $data);
@@ -31,7 +31,7 @@ class Model extends CI_Model
         }
     }
 
-    public function updateDataModel($table, $data, $param)
+    public function updateDataModel(string $table, array $data, array $param): array
     {
         try {
             $this->db->set($data)->where($param)->update($table, $data);
@@ -55,7 +55,21 @@ class Model extends CI_Model
         }
     }
 
-    public function deleteDataModel($table, $param)
+    public function getDataJoinModel(string $table, array $data, array $param = null, array $joins)
+    {
+        $this->db->select(implode(",", $data));
+        foreach ($joins as $join) {
+            call_user_func_array([$this->db, 'join'], $join);
+        }
+        if ($param !== null) {
+            $this->db->where($param);
+        }
+        $query = $this->db->get($table);
+        $result = $query->result_array();
+        return $result;
+    }
+
+    public function deleteDataModel(string $table, array $param)
     {
         try {
             $this->db->delete($table, $param);
